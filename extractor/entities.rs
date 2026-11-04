@@ -60,6 +60,18 @@ fn classify_template(name: &str) -> Option<&'static str> {
         "act infobox" => Some("QuestAct"),
         "avatar infobox" => Some("Avatar"),
         "outfit infobox" => Some("Outfit"),
+        "soundtrack infobox" => Some("Soundtrack"),
+        "miliastra wonderland cosmetic component infobox" => Some("CosmeticComponent"),
+        "miliastra wonderland cosmetic set infobox" => Some("CosmeticSet"),
+        "genius invokation tcg skill infobox" => Some("TCGSkill"),
+        "chapter infobox" => Some("QuestChapter"),
+        "component infobox" => Some("Component"),
+        "constellation overview infobox" => Some("ConstellationOverview"),
+        "achievement category infobox" => Some("AchievementCategory"),
+        "weapon series infobox" => Some("WeaponSeries"),
+        "wish series infobox" => Some("WishSeries"),
+        "album infobox" => Some("Album"),
+        "thespian trick infobox" => Some("ThespianTrick"),
         _ => None,
     }
 }
@@ -104,6 +116,7 @@ pub fn extract(page: &WikiPage, nodes: &[Node<'_>]) -> Option<Entity> {
             revid: page.revid,
             title: page.title.clone(),
             kind: kind.to_string(),
+            source_template: template.to_string(),
             attributes,
         });
     }

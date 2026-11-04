@@ -8,5 +8,6 @@ pub struct Entity {
     pub revid: u64,
     pub title: String,
     pub kind: String,
+    pub source_template: String,
     pub attributes: BTreeMap<String, String>,
 }
