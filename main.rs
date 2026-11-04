@@ -12,6 +12,7 @@ mod graph {
     pub mod edges;
     pub mod neo4j;
     pub mod nodes;
+    pub mod resolvers;
 }
 mod export {
     pub mod jsonl;
@@ -119,11 +120,6 @@ fn extract_corpus(limit: Option<usize>) -> anyhow::Result<()> {
             entity_count += 1;
         }
 
-        if let Some(entity) = extractor::entities::extract(&page, &parsed.nodes) {
-            export::jsonl::write_item(&mut entities, &entity)?;
-            entity_count += 1;
-        }
-
         if let Some(alias) = extractor::aliases::extract(&page, &parsed.nodes) {
             export::jsonl::write_item(&mut aliases, &alias)?;
             alias_count += 1;
@@ -167,6 +163,10 @@ async fn main() -> Result<()> {
             .transpose()?;
 
         return extract_corpus(limit);
+    }
+
+    if std::env::args().nth(1).as_deref() == Some("resolve") {
+        return graph::resolvers::resolve_corpus();
     }
 
     let max_batches = std::env::args()
