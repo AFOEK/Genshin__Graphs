@@ -10,6 +10,7 @@ mod extractor {
 }
 mod graph {
     pub mod edges;
+    pub mod facts;
     pub mod neo4j;
     pub mod nodes;
     pub mod resolvers;
@@ -167,6 +168,10 @@ async fn main() -> Result<()> {
 
     if std::env::args().nth(1).as_deref() == Some("resolve") {
         return graph::resolvers::resolve_corpus();
+    }
+
+    if std::env::args().nth(1).as_deref() == Some("facts") {
+        return graph::facts::extract_facts();
     }
 
     let max_batches = std::env::args()
