@@ -10,6 +10,7 @@ mod extractor {
 }
 mod graph {
     pub mod edges;
+    pub mod extractors;
     pub mod facts;
     pub mod neo4j;
     pub mod nodes;
